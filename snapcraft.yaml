@@ -1,6 +1,6 @@
 name: mc-installer
 title: Minecraft Installer
-version: '10.1'
+version: '10.2'
 
 summary: A simple installer for Minecraft - Java Edition
 description: | 
@@ -57,14 +57,14 @@ parts:
   game:
     plugin: nil
     build-packages:
-      - openjdk-16-jre-headless        
+      - openjdk-17-jre-headless        
       - ca-certificates-java
       - ca-certificates      
     stage-packages:
       - libglu1-mesa
       - libswt-gtk-4-java
       - python3-requests
-      - openjdk-16-jre-headless
+      - openjdk-17-jre-headless
       - libxss1
       - libgconf-2-4
       - libcurl4
