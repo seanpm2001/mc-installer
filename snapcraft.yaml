@@ -69,6 +69,7 @@ parts:
       - libgconf-2-4
       - libcurl4
       - x11-xserver-utils
+      - libflite1
       
   cleanup:
     after: 
