@@ -12,8 +12,8 @@ import os.path
 import subprocess
 
 # QUICK FIX - OLDER LAUNCHER
-DOWNLOAD_LINK = "https://archive.org/download/minecraft-launcher_202103/Minecraft.tar.gz"
-#DOWNLOAD_LINK = "https://launcher.mojang.com/download/Minecraft.tar.gz"
+#DOWNLOAD_LINK = "https://archive.org/download/minecraft-launcher_202103/Minecraft.tar.gz"
+DOWNLOAD_LINK = "https://launcher.mojang.com/download/Minecraft.tar.gz"
 DOWNLOAD_FILE = "Minecraft.tar.gz"
 RESULT_PATH = "minecraft-launcher"
 
@@ -59,7 +59,7 @@ class SnapUIWindow(Gtk.Window):
         self.start_download()
 
     def start_download(self):
-        self.infolabel.set_text("Downloading Minecraft: Java Edition launcher. (VERSION: 2.2.1262)")
+        self.infolabel.set_text("Downloading Minecraft: Java Edition launcher")
         self.progressbar.set_text(DOWNLOAD_LINK)
         self.progressbar.show()
         self.retry_button.hide()
@@ -103,7 +103,7 @@ class SnapUIWindow(Gtk.Window):
         subprocess.call(['rm','-f', DOWNLOAD_FILE])
 
         with open('Minecraft-Launcher-Last-Modified', 'w+') as f:
-            f.write(r.headers.get("Last-Modified"))
+            f.write(r.headers.get("Last-Modified", DOWNLOAD_LINK))
 
         Gtk.main_quit()
 
@@ -131,8 +131,8 @@ def requires_update():
     except FileNotFoundError:
         last_modified = "NEVER"
     try:
-        response = requests.head(DOWNLOAD_LINK)
-        if response.headers.get("Last-Modified") != last_modified:
+        response = requests.head(DOWNLOAD_LINK, allow_redirects=True, timeout=10)
+        if response.headers.get("Last-Modified", DOWNLOAD_LINK) != last_modified:
             # New Launcher Available
             return True
         else:
