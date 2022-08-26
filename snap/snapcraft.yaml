@@ -77,7 +77,7 @@ parts:
       - launcher
     plugin: nil
     build-snaps: 
-      - core20
+      - core22
       - gnome-3-38-2004
     override-prime: |
       set -eux
