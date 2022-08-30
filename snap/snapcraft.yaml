@@ -10,7 +10,7 @@ license: MIT
 assumes:
   - command-chain
   
-base: core22
+base: core20
 grade: stable
 confinement: strict
 compression: lzo
@@ -26,7 +26,8 @@ plugs:
 
 apps:
   mc-installer:
-    extensions: [ gnome ]
+    extensions:
+      - gnome-3-38
     command: launch
     command-chain: 
       - bin/homeishome-launch    
@@ -69,19 +70,17 @@ parts:
       - libcurl4
       - x11-xserver-utils
       - libflite1
-    
-    build-snaps: [gnome-42-2204-sdk/latest/edge, gnome-42-2204/latest/edge]
-      
+     
   cleanup:
     after: 
       - game
       - launcher
     plugin: nil
     build-snaps: 
-      - core22
-      - gnome-42-2204
+      - core20
+      - gnome-3-38-2004
     override-prime: |
       set -eux
-      for snap in "core22" "gnome-42-2204"; do  # List all content-snaps and base snaps you're using here
+      for snap in "core22" "gnome-3-38-2004"; do  # List all content-snaps and base snaps you're using here
         cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
