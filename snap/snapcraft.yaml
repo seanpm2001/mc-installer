@@ -27,7 +27,7 @@ plugs:
 apps:
   mc-installer:
     extensions:
-      - gnome
+      - gnome-42-2204
     command: launch
     command-chain: 
       - bin/homeishome-launch    
@@ -78,9 +78,9 @@ parts:
     plugin: nil
     build-snaps: 
       - core22
-      - gnome
+      - gnome-42-2204
     override-prime: |
       set -eux
-      for snap in "core22" "gnome"; do  # List all content-snaps and base snaps you're using here
+      for snap in "core22" "gnome-42-2204"; do  # List all content-snaps and base snaps you're using here
         cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
